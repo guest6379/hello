@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"net"
 	"net/http"
-	"os"
 )
 
 func main() {
@@ -12,14 +12,14 @@ func main() {
 		fmt.Fprintln(w, "hello world")
 	})
 
-	port := os.Getenv("PORT")
-	log.Printf("get port from env => (%v)\n", port)
-	if port == "" {
-		port = "8080"
-	}
-	log.Println("now listening on 0.0.0.0 port:", port)
-	err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%v", port), nil)
+	listener, err := net.Listen("tcp", ":0")
 	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Using port:", listener.Addr().(*net.TCPAddr).Port)
+
+	if err := http.Serve(listener, nil); err != nil {
 		log.Fatalln(err)
 	}
 }
