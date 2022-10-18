@@ -17,7 +17,7 @@ func main() {
 		port = "80"
 	}
 	log.Println("port is ", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", 443), nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
