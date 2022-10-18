@@ -18,7 +18,7 @@ func main() {
 		port = "8080"
 	}
 	log.Println("now listening on port:", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
+	err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%v", port), nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
