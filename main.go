@@ -13,10 +13,11 @@ func main() {
 	})
 
 	port := os.Getenv("PORT")
+	log.Printf("get port from env => (%v)\n", port)
 	if port == "" {
-		port = "80"
+		port = "8080"
 	}
-	log.Println("port is ", port)
+	log.Println("now listening on port:", port)
 	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
 	if err != nil {
 		log.Fatalln(err)
